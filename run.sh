@@ -1,1 +1,1 @@
-CUDA_VISIBLE_DEVICES=1,6 python main.pyma
+CUDA_VISIBLE_DEVICES=1,6 python main.py
