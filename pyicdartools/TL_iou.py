@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
-sys.path.append('.')
+sys.path.append('..')
+
 from collections import namedtuple
-import rrc_evaluation_funcs
+import pyicdartools.rrc_evaluation_funcs
 import importlib
 from shapely.geometry import Polygon as plg
 import numpy as np
