@@ -92,7 +92,7 @@ def main():
     print('EAST <==> Prepare <==> Network <==> Begin')
     model = East()
     model = nn.DataParallel(model, device_ids=cfg.gpu_ids)
-    model = model.cuda()
+    model = model.to('cuda')
     init_weights(model, init_type=cfg.init_type)
     cudnn.benchmark = True
 
