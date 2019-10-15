@@ -3,7 +3,7 @@
 import sys
 sys.path.append('.')
 from collections import namedtuple
-from pyicdartools import rrc_evaluation_funcs
+import rrc_evaluation_funcs
 import importlib
 from shapely.geometry import Polygon as plg
 import numpy as np

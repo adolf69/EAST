@@ -36,6 +36,10 @@ def train(train_loader, model, criterion, scheduler, optimizer, epoch):
     for i, (img, score_map, geo_map, training_mask) in enumerate(train_loader):
         data_time.update(time.time() - end)
 
+        print('score_map', score_map)
+        print('geo_map', geo_map)
+        print('training_mask', training_mask)
+
         if cfg.gpu is not None:
             img, score_map, geo_map, training_mask = img.cuda(), score_map.cuda(), geo_map.cuda(), training_mask.cuda()
 
