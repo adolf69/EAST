@@ -39,8 +39,8 @@ def train(train_loader, model, criterion, scheduler, optimizer, epoch):
         print('score_map', score_map.shape)
         print('1111111', score_map[1, ::])
         np.savetxt('np_test.txt', geo_map[19, 1, ::])
-        print('333333', np.where(geo_map[19, 1, :, :] != 0))
-        print('222222', np.sum(score_map[19, 0, ::]))
+        print('333333', np.where(geo_map[19, 1, ::] != 0))
+        print('222222', np.sum(score_map[19, ::],))
         print('geo_map', geo_map.shape)
         print('training_mask', training_mask.shape)
 
