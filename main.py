@@ -37,6 +37,7 @@ def train(train_loader, model, criterion, scheduler, optimizer, epoch):
         data_time.update(time.time() - end)
 
         print('score_map', score_map.shape)
+        print('1111111', score_map[1, ::])
         print('geo_map', geo_map.shape)
         print('training_mask', training_mask.shape)
 
