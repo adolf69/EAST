@@ -36,32 +36,34 @@ def train(train_loader, model, criterion, scheduler, optimizer, epoch):
     for i, (img, score_map, geo_map, training_mask) in enumerate(train_loader):
         data_time.update(time.time() - end)
 
-        print('score_map', score_map)
-        print('geo_map', geo_map)
-        print('training_mask', training_mask)
+        print('score_map', score_map.shape)
+        print('geo_map', geo_map.shape)
+        print('training_mask', training_mask.shape)
 
-        if cfg.gpu is not None:
-            img, score_map, geo_map, training_mask = img.cuda(), score_map.cuda(), geo_map.cuda(), training_mask.cuda()
+        break
 
-        f_score, f_geometry = model(img)
-        loss1 = criterion(score_map, f_score, geo_map, f_geometry, training_mask)
-        losses.update(loss1.item(), img.size(0))
-
-        # backward
-        scheduler.step()
-        optimizer.zero_grad()
-        loss1.backward()
-        optimizer.step()
-
-        # measure elapsed time
-        batch_time.update(time.time() - end)
-        end = time.time()
-
-        if i % cfg.print_freq == 0:
-            print('EAST <==> TRAIN <==> Epoch: [{0}][{1}/{2}] Loss {loss.val:.4f} Avg Loss {loss.avg:.4f})\n'.format(
-                epoch, i, len(train_loader), loss=losses))
-
-        save_loss_info(losses, epoch, i, train_loader)
+        # if cfg.gpu is not None:
+        #     img, score_map, geo_map, training_mask = img.cuda(), score_map.cuda(), geo_map.cuda(), training_mask.cuda()
+        #
+        # f_score, f_geometry = model(img)
+        # loss1 = criterion(score_map, f_score, geo_map, f_geometry, training_mask)
+        # losses.update(loss1.item(), img.size(0))
+        #
+        # # backward
+        # scheduler.step()
+        # optimizer.zero_grad()
+        # loss1.backward()
+        # optimizer.step()
+        #
+        # # measure elapsed time
+        # batch_time.update(time.time() - end)
+        # end = time.time()
+        #
+        # if i % cfg.print_freq == 0:
+        #     print('EAST <==> TRAIN <==> Epoch: [{0}][{1}/{2}] Loss {loss.val:.4f} Avg Loss {loss.avg:.4f})\n'.format(
+        #         epoch, i, len(train_loader), loss=losses))
+        #
+        # save_loss_info(losses, epoch, i, train_loader)
 
 
 def main():
@@ -113,7 +115,8 @@ def main():
         start_epoch = 0
     print('EAST <==> Prepare <==> Network <==> Done')
 
-    for epoch in range(start_epoch, cfg.max_epochs):
+    # for epoch in range(start_epoch, cfg.max_epochs):
+    for epoch in range(1):
 
         train(train_loader, model, criterion, scheduler, optimizer, epoch)
 
