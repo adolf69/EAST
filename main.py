@@ -40,12 +40,14 @@ def train(train_loader, model, criterion, scheduler, optimizer, epoch):
         print('geo_map', geo_map.shape)
         print('training_mask', training_mask.shape)
 
-        break
+        # break
 
-        # if cfg.gpu is not None:
-        #     img, score_map, geo_map, training_mask = img.cuda(), score_map.cuda(), geo_map.cuda(), training_mask.cuda()
-        #
-        # f_score, f_geometry = model(img)
+        if cfg.gpu is not None:
+            img, score_map, geo_map, training_mask = img.cuda(), score_map.cuda(), geo_map.cuda(), training_mask.cuda()
+
+        f_score, f_geometry = model(img)
+        print('f_score', f_score.shape)
+        print('f_geometry', f_geometry.shape)
         # loss1 = criterion(score_map, f_score, geo_map, f_geometry, training_mask)
         # losses.update(loss1.item(), img.size(0))
         #
@@ -94,7 +96,7 @@ def main():
     print('EAST <==> Prepare <==> Network <==> Begin')
     model = East()
     model = nn.DataParallel(model, device_ids=cfg.gpu_ids)
-    model = model.to('cuda')
+    model = model.cuda()
     init_weights(model, init_type=cfg.init_type)
     cudnn.benchmark = True
 
